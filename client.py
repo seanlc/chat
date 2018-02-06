@@ -32,6 +32,9 @@ outputs = []
 
 userName = sys.argv[1]
 
+#TODO send username here
+s.send(userName.encode())
+
 running = 1
 while running:
     try: 
