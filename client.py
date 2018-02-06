@@ -1,6 +1,13 @@
 import socket
 import sys
 import select
+import signal
+
+def sig_handler(signal, frame):
+    print("Exit signal received")
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, sig_handler)
 
 try:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

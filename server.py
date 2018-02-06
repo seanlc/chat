@@ -1,10 +1,17 @@
 import socket
 import select
+import signal
+import sys
 
 def send_msg(msg):
   for cn in conns:
       cn.send(msg)
 
+def sig_handler(signal, frame):
+    print("exit signal received")
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, sig_handler)
 
 s = socket.socket()
 print("socket created")
