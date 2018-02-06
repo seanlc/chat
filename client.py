@@ -23,6 +23,8 @@ s.connect(('' , port))
 inputs = [s, sys.stdin]
 outputs = []
 
+userName = sys.argv[1]
+
 running = 1
 while running:
     try: 
@@ -35,8 +37,13 @@ while running:
     for ele in in_rdy:
         if ele == s:
             msg = s.recv(4196)
-            print("server said " + str(msg.decode()))
+            if len(msg) > 0:
+                print(str(msg.decode()))
+            else:
+                print("server diconnected")
+                s.close()
+                running = 0
         elif ele == sys.stdin:
             msg = input()
-            s.send(msg.encode())
-#            print("sending message: " + msg)
+            outboundMsg = userName + ": " + msg 
+            s.send(outboundMsg.encode())
