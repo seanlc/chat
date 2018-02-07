@@ -3,11 +3,7 @@ import sys
 import select
 import signal
 
-def sig_handler(signal, frame):
-    print("Exit signal received")
-    sys.exit(0)
 
-signal.signal(signal.SIGINT, sig_handler)
 
 class chatClient:
     def __init__(self, uName, port):
@@ -24,6 +20,11 @@ class chatClient:
         self.inputs = [self.s, sys.stdin]
         self.running = 1
         self.in_rdy = []
+        signal.signal(signal.SIGINT, self.sig_handler)
+
+    def sig_handler(self, signal, frame):
+        print("Exit signal received")
+        sys.exit(0)
 
     def __get_input(self):
         try: 
