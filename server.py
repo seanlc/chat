@@ -39,10 +39,9 @@ while True:
             print('Got connection from', addr)
             
             inputs.append(c)
+            conns.append(c)
             userName = c.recv(4196)
             nameMappings[c] = userName.decode()
-            conns.append(c)
-            
             msg = str(userName.decode()) + " has joined the chat room"
             send_msg(msg.encode())
         else:
