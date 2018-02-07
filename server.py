@@ -5,7 +5,7 @@ import sys
 
 class chatServer:
 
-    def __init__(self, port):
+    def __init__(self, port = 4188):
         self.s = socket.socket()
         self.port = port
         self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -68,6 +68,6 @@ class chatServer:
         while True:
             self.__get_input() 
 
-server = chatServer(4188)
+server = chatServer()
 server.start()
 

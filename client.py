@@ -3,10 +3,8 @@ import sys
 import select
 import signal
 
-
-
 class chatClient:
-    def __init__(self, uName, port):
+    def __init__(self, uName, port = 4188):
     
         try:    
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -66,13 +64,5 @@ class chatClient:
         self.s.send(self.userName.encode())
         self.__operate()
 
-#
-#try:
-#    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#    s.settimeout(0.25)
-#    print("Socket created")
-#except socket.error as err:
-#    print("socket creation failed with error %s" %(err))
-
-client = chatClient(sys.argv[1], 4188)
+client = chatClient(sys.argv[1])
 client.connect()
